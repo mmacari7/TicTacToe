@@ -1,6 +1,8 @@
 //Michael Macari, Jon Lafluer, Anthony Rusignuolo
 //Tic Tac Toe
 
-console.log("Hello");
+//Main app to call rest of functions
 
-console.log("new branch");
+var game = require("./game");
+
+game.newGame();
