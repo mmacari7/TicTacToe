@@ -5,4 +5,9 @@
 
 var game = require("./game");
 
+
+
+//Create a new game?
 game.newGame();
+console.log(data.numPlayers, data.boardSize, data.winSequence);
+//Load Saved Game??
