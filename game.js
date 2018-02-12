@@ -19,7 +19,7 @@ module.exports = {          //Allows the export of module
                         // ......
                         // ......
                         console.log("Creating game");
-                        data.setVariables(numPlayers, boardSize, winSequence);
+                        data.createBoard(numPlayers, boardSize, winSequence);
                     }
                     else{
                         throw("Victory is not possible given these conditions");
@@ -36,11 +36,11 @@ module.exports = {          //Allows the export of module
         else{
             throw(err);
         }
-    }
+    },
 
-    // loadGame: function(){
-    //     var gameFile = prompt("Enter the name of the game file to resume");
-    // }
+    loadGame: function(){
+         var gameFile = prompt("Enter the name of the game file to resume");
+     }
 
 };
 

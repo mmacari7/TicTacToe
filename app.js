@@ -3,11 +3,13 @@
 
 //Main app to call rest of functions
 
-var game = require("./game");
-
+var game = require("./game");               //Declares our dependencies
+var data = require("./data");
 
 
 //Create a new game?
-game.newGame();
-console.log(data.numPlayers, data.boardSize, data.winSequence);
-//Load Saved Game??
+game.newGame();                             //Calls the new game function from the game module
+
+console.log(data.gameBoard);
+
+console.log('FUCK');
