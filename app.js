@@ -5,11 +5,8 @@
 
 var game = require("./game");               //Declares our dependencies
 var data = require("./data");
-
+var prompt = require("prompt-sync")();
 
 //Create a new game?
 game.newGame();                             //Calls the new game function from the game module
 
-console.log(data.gameBoard);
-
-console.log('FUCK');
