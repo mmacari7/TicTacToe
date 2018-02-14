@@ -92,7 +92,7 @@ module.exports = {
     },
 
     checkWin: function(row, col){       //function for checking if someone has won the game
-        if(this.checkDownLeftDiag(row,col) || this.checkDownRightDiag(row,col) || this.checkCol(row, col) || this.checkRow(row, col) || this.checkTie){
+        if(this.checkDownLeftDiag(row,col) || this.checkDownRightDiag(row,col) || this.checkCol(row, col) || this.checkRow(row, col) || this.checkTie()){
             return(true);                               //if any of the tic tac toes return a true we return true as win
         }
         else{
@@ -109,6 +109,9 @@ module.exports = {
         if (Math.pow(this.boardSize, 2) == this.moveNum) {                      //Checks for a tie by seeing if the board is filled
             console.log("It is a tie. Computer says, all of you are losers.");      //Tells user how it is
             return(true);
+        }
+        else{
+            return(false);
         }
 
     },

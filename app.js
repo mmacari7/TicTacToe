@@ -6,6 +6,9 @@ var game = require("./game");               //Declares our dependencies
 var data = require("./data");
 var prompt = require("prompt-sync")();
 
+
+
+
 //Create a new game?
 game.newGame();                             //Calls the new game function from the game module
 data.drawBoard();
@@ -16,7 +19,7 @@ var i =0;
 
 //Game loop
 var x = false;
-while(!x){
+while(!x){                                  //Loops until quit is written, or someone wins, or a tie happens
 
     var row = prompt("Enter row number: ");
     if(row == "quit"){
@@ -30,6 +33,7 @@ while(!x){
     }
     var s = data.addMove(row, col);
     if(s){
+        console.log("in check");
         data.drawBoard();
         x = data.checkWin(row, col);
     }
