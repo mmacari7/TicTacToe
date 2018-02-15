@@ -92,32 +92,16 @@ module.exports = {          //Allows the export of module
         while (!x) {                                  //Loops until quit is written, or someone wins, or a tie happens
             var sg = "";
             console.log("Type 'quit' at any time to quit");
-            var row = prompt("Enter row number: ");
-            if (row == "quit") {
+            var choice = prompt("Enter row number space column number: ").split(" ");
+            var row = choice[0];
+            var col = choice[1];
+            if (choice[0] == "quit") {
                 while(sg != 'y' && sg != 'n') {       //Game user must input if they want to save or not
                     sg = prompt("Would you like to save? Enter y/n: ");
                 }
                 if(sg == 'y') {
                     this.saveGame();
                     console.log("Shutting Down");       //Shut down message
-                    x = true;
-                    break;
-                }
-                else {
-                    console.log("Shutting Down");
-                    x = true;
-                    break;
-                }
-
-            }
-            var col = prompt("Enter column number: ");
-            if (col == "quit") {
-                while(sg != 'y' &&  sg != 'n'){
-                    sg = prompt("Would you like to save? Enter y/n: ");       //Same for column quit
-                }
-                if(sg == 'y') {
-                    this.saveGame();
-                    console.log("Shutting Down");               //shutdown message
                     x = true;
                     break;
                 }
