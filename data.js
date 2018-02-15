@@ -1,6 +1,6 @@
 //Where all of the game data is to be held and accessed
 
-
+var game = require("./game");
 
 module.exports = {
     numPlayers: 0,                  //Init for variables inside of the module itself.
@@ -12,13 +12,14 @@ module.exports = {
     moveNum: 0,
 
     loadBoard: function(numPlayers, boardSize, winSequence, playerTurn, gameBoard, moveNum){        //Function takes in all of the data from text as parameters and sets them to the data variables.
-        this.numPlayers = numPlayers;
-        this.boardSize = boardSize;
-        this.winSequence = winSequence;
-        this.playerTurn = playerTurn;
-        this.gameBoard = gameBoard;
-        this.moveNum = moveNum;
 
+        this.numPlayers = parseInt(numPlayers);
+        this.boardSize = parseInt(boardSize);
+        this.winSequence = parseInt(winSequence);
+        this.playerTurn = parseInt(playerTurn);
+        this.gameBoard = gameBoard;
+        this.moveNum = parseInt(moveNum);
+        this.drawBoard();
      },
 
     createBoard: function(numPlayers, boardSize, winSequence){     //Sets the variables passed in by the new game

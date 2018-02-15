@@ -36,20 +36,34 @@ module.exports = {          //Allows the export of module
         }
     },
 
+
+
     loadGame: function(){
          var gameFile = prompt("Enter the name of the game file to load, excluding extensions: ");  //Gets file name to load
          gameFile = gameFile + ".txt";
-         fs.readFile(gameFile, "utf8", function(err, fileData){                     //Tells it what to read
-             if(err){                                               //If file is not found throw an error
-                 throw(err);
-             }
-             else{
-                 //Otherwise pass the data into data
-                 var fileContent = JSON.parse(fileData);                   //Read the file and get all of the data to parse
-                 data.loadBoard(fileContent.numPlayers, fileContent.boardSize, fileContent.winSequence, fileContent.playerTurn, fileContent.gameBoard, fileContent.moveNum);    //Passes all the data into data loadBoard to resume game
-             }
-         });
-     },
+         try {
+             var fileData = fs.readFileSync(gameFile, "utf8");
+             var fileContent = JSON.parse(fileData);
+             data.loadBoard(fileContent.numPlayers, fileContent.boardSize, fileContent.winSequence, fileContent.playerTurn, fileContent.gameBoard, fileContent.moveNum);//Passes all the data into data loadBoard to resume game
+             this.mainLoop();
+         }
+         catch(error){
+             console.log("File doesnt exist");
+             console.log("Error");
+         }
+
+    //      fs.readFile(gameFile, "utf8", function(err, fileData){                     //Tells it what to read
+    //          if(err){                                               //If file is not found throw an error
+    //              throw(err);
+    //          }
+    //          else{
+    //              //Otherwise pass the data into data
+    //              var fileContent = JSON.parse(fileData);                   //Read the file and get all of the data to parse
+    //              //data.loadBoard(fileContent.numPlayers, fileContent.boardSize, fileContent.winSequence, fileContent.playerTurn, fileContent.gameBoard, fileContent.moveNum);//Passes all the data into data loadBoard to resume game
+    //          }
+    //      });
+    //     data.loadBoard(fileContent.numPlayers, fileContent.boardSize, fileContent.winSequence, fileContent.playerTurn, fileContent.gameBoard, fileContent.moveNum);//Passes all the data into data loadBoard to resume game
+    },
 
     saveGame: function(){
         var obj = {                             //Creates the object from all the variables in data that we are going to save to file
@@ -69,6 +83,57 @@ module.exports = {          //Allows the export of module
             }
             console.log("File saved as " + fname);
         });
+    },
+
+
+    //main game loop
+    mainLoop: function(){
+        var x = false;
+        while (!x) {                                  //Loops until quit is written, or someone wins, or a tie happens
+            var sg = "";
+            console.log("Type 'quit' at any time to quit");
+            var row = prompt("Enter row number: ");
+            if (row == "quit") {
+                while(sg != 'y' && sg != 'n') {       //Game user must input if they want to save or not
+                    sg = prompt("Would you like to save? Enter y/n: ");
+                }
+                if(sg == 'y') {
+                    this.saveGame();
+                    console.log("Shutting Down");       //Shut down message
+                    x = true;
+                    break;
+                }
+                else {
+                    console.log("Shutting Down");
+                    x = true;
+                    break;
+                }
+
+            }
+            var col = prompt("Enter column number: ");
+            if (col == "quit") {
+                while(sg != 'y' &&  sg != 'n'){
+                    sg = prompt("Would you like to save? Enter y/n: ");       //Same for column quit
+                }
+                if(sg == 'y') {
+                    this.saveGame();
+                    console.log("Shutting Down");               //shutdown message
+                    x = true;
+                    break;
+                }
+                else {
+                    console.log("Shutting Down");
+                    x = true;
+                    break;
+                }
+            }
+            var s = data.addMove(row, col);     //Calls the move add function
+            if (s) {
+                data.drawBoard();               //Redraws the board
+                x = data.checkWin(row, col);    //Checks if a win happened and exits if so
+            }
+
+        }
     }
 };
 
