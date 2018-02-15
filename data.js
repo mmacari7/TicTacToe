@@ -1,7 +1,6 @@
 //Where all of the game data is to be held and accessed
 
-var fs = require("fs");
-var game = require("./game");
+
 
 module.exports = {
     numPlayers: 0,                  //Init for variables inside of the module itself.
@@ -11,6 +10,16 @@ module.exports = {
     playerTurn: 0,                          //Will point to indices of what players turn it is.
     gameBoard: [],
     moveNum: 0,
+
+    loadBoard: function(numPlayers, boardSize, winSequence, playerTurn, gameBoard, moveNum){        //Function takes in all of the data from text as parameters and sets them to the data variables.
+        this.numPlayers = numPlayers;
+        this.boardSize = boardSize;
+        this.winSequence = winSequence;
+        this.playerTurn = playerTurn;
+        this.gameBoard = gameBoard;
+        this.moveNum = moveNum;
+
+     },
 
     createBoard: function(numPlayers, boardSize, winSequence){     //Sets the variables passed in by the new game
         this.numPlayers = numPlayers;
@@ -99,7 +108,7 @@ module.exports = {
             return(false);
         }
 
-        // this.checkDownLeftDiag(row,col);
+        // this.checkDownLeftDiag(row,col);             //Test Functions
         // this.checkDownRightDiag(row,col);
         // this.checkCol(row, col);
         // this.checkRow(row, col);
@@ -169,7 +178,7 @@ module.exports = {
                 }
             }
             else{
-                count = 0;
+                count = 0;                                          //Count reverts to 0 when not seeing letters in a row.
             }
 
             row++;

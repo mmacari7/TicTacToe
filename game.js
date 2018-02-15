@@ -1,5 +1,6 @@
 //Game functions to be implimented
 var prompt = require("prompt-sync")();
+var fs = require("fs");
 var data = require("./data");
 
 module.exports = {          //Allows the export of module
@@ -36,7 +37,38 @@ module.exports = {          //Allows the export of module
     },
 
     loadGame: function(){
-         var gameFile = prompt("Enter the name of the game file to resume");
+         var gameFile = prompt("Enter the name of the game file to load, excluding extensions: ");  //Gets file name to load
+         gameFile = gameFile + ".txt";
+         fs.readFile(gameFile, "utf8", function(err, fileData){                     //Tells it what to read
+             if(err){                                               //If file is not found throw an error
+                 throw(err);
+             }
+             else{
+                 //Otherwise pass the data into data
+                 var fileContent = JSON.parse(fileData);                   //Read the file and get all of the data to parse
+                 data.loadBoard(fileContent.numPlayers, fileContent.boardSize, fileContent.winSequence, fileContent.playerTurn, fileContent.gameBoard, fileContent.moveNum);    //Passes all the data into data loadBoard to resume game
+             }
+         });
      },
+
+    saveGame: function(){
+        var obj = {                             //Creates the object from all the variables in data that we are going to save to file
+            numPlayers: data.numPlayers,
+            boardSize: data.boardSize,
+            winSequence: data.winSequence,
+            playerTurn: data.playerTurn,
+            gameBoard: data.gameBoard,
+            moveNum: data.moveNum
+        };
+        var save = JSON.stringify(obj);         //Uses the stringify function to turn our object into a string for the text file.
+        var fname = prompt("Enter a name for your save file: ");        //File name
+        fname = fname + ".txt";                                         //appends .txt
+        fs.writeFile(fname, save, function(err){                        //Writes the file to text
+            if(err){
+                throw(err);
+            }
+            console.log("File saved as " + fname);
+        });
+    }
 };
 
