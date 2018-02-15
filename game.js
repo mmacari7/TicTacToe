@@ -9,8 +9,8 @@ module.exports = {          //Allows the export of module
         //console.log("in new game");
         var err = "Input is invalid, you are not worthy, goodbye";
         var numPlayers = prompt("Enter number of players; Minimum 1, Maximum 26: ");
-        if(numPlayers >= 1 && numPlayers <= 26){
-            boardSize = prompt("Enter a board size; Maximum 999: ");
+        if(numPlayers > 1 && numPlayers <= 26){
+            var boardSize = Number(prompt("Enter a board size; Maximum 999: "));
             if(boardSize > 1 && boardSize <= 999){
                 var winSequence = prompt("What is the win sequence: ");
                 if(winSequence > 0 && winSequence <= boardSize){

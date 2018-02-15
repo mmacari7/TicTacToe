@@ -19,7 +19,6 @@ if(nglg == "new"){
 }
 else if(nglg == "load" ){
     game.loadGame();
-    //data.drawBoard();
 }
 else{
     console.log("Shutting Down");
